@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vales de Amor 💖</title>
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #5a2a27;
+  }
+  .container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    animation: fadeIn 1.2s ease-in-out;
+  }
+  h1 {
+    color: #d6336c;
+    margin-bottom: 10px;
+  }
+  .vale {
+    background: #ffe6eb;
+    border: 2px dashed #d6336c;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+  }
+  .vale:hover {
+    transform: scale(1.03);
+    background: #ffdce5;
+  }
+  .hidden {
+    background: #d6336c;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  .revealed {
+    background: #fff;
+    color: #5a2a27;
+  }
+  #password-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(255, 228, 232, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  input[type="password"] {
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #d6336c;
+    outline: none;
+    width: 200px;
+    text-align: center;
+  }
+  button {
+    background: #d6336c;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    margin-top: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  button:hover {
+    background: #b02a56;
+  }
+  @keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
+  }
+</style>
+</head>
+<body>
+<div id="password-screen">
+  <h2>💞 Digite a senha para abrir a surpresa 💞</h2>
+  <input type="password" id="pw" placeholder="Senha">
+  <button onclick="checkPassword()">Abrir surpresa</button>
+</div>
+
+<div class="container" id="main" style="display:none;">
+  <h1>Vales de Amor 💌</h1>
+  <p>Cada vale é um pedacinho do nosso amor. Clique para revelar 💖</p>
+
+  <div id="vales">
+    <!-- Vales aparecerão aqui -->
+  </div>
+</div>
+
+<script>
+const SECRET_PW = "300525";
+
+const vales = [
+  "Vale um jantar à luz de velas 🍷✨",
+  "Vale uma massagem relaxante 💆‍♀️",
+  "Vale uma noite de filme com pipoca 🍿❤️",
+  "Vale um abraço apertado (daqueles demorados) 🤗",
+  "Vale um “eu te amo” dito olhando nos olhos 💋",
+  "Vale um dia inteiro só nosso 🫶",
+  "Vale um café da manhã na cama ☕🥐",
+  "Vale um bilhete de amor escrito à mão 💌",
+  "Vale um milkshake 🍨💞",
+  "Vale uma noite de jogos 🎮❤️"
+];
+
+function checkPassword() {
+  const input = document.getElementById('pw').value;
+  if (input === SECRET_PW) {
+    document.getElementById('password-screen').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+  } else {
+    alert('Senha incorreta 💔');
+  }
+}
+
+const container = document.getElementById("vales");
+vales.forEach(text => {
+  const div = document.createElement("div");
+  div.className = "vale hidden";
+  div.textContent = "💝 Clique para abrir 💝";
+  div.onclick = () => {
+    if (div.classList.contains("hidden")) {
+      div.classList.remove("hidden");
+      div.classList.add("revealed");
+      div.textContent = text;
+    } else {
+      div.classList.remove("revealed");
+      div.classList.add("hidden");
+      div.textContent = "💝 Clique para abrir 💝";
+    }
+  };
+  container.appendChild(div);
+});
+</script>
+</body>
+</html>
